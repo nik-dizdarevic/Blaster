@@ -9,12 +9,17 @@ import SwiftUI
 
 @main
 struct BlasterApp: App {
+    
+    @StateObject var store = CoinFetcher(named: "Default")
     let persistenceController = PersistenceController.shared
+    
+    @AppStorage("startPage") var startPage: Page = .market
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(startPage: startPage)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(store)
         }
     }
 }

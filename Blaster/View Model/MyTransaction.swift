@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct MyTransaction {
+    var coinPrice: Decimal
+    var quantity: Decimal
+    var date: Date
+    var type: TransactionType
+    var notes: String
+    var total: Decimal {
+        get { coinPrice * quantity }
+        set { }
+    }
+}

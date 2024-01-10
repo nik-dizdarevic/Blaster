@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Chart" representedClassName="Chart" syncable="YES" codeGenerationType="class">
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <relationship name="coin_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="charts_" inverseEntity="Coin"/>
+        <relationship name="priceSummaries_" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PriceSummary" inverseName="chart_" inverseEntity="PriceSummary"/>
+    </entity>
+    <entity name="Coin" representedClassName="Coin" syncable="YES" codeGenerationType="class">
+        <attribute name="ath_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="athChangePercentage_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="atl_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="atlChangePercentage_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="circulatingSupply_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="currentPrice_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="high24H_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="id_" optional="YES" attributeType="String"/>
+        <attribute name="image_" optional="YES" attributeType="String"/>
+        <attribute name="low24H_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="marketCap_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="marketCapRank" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="maxSupply_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <attribute name="priceChange24H_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="priceChangePercentage24H_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="symbol_" optional="YES" attributeType="String"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary"/>
+        <attribute name="totalSupply_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="totalVolume_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="watchList" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="charts_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chart" inverseName="coin_" inverseEntity="Chart"/>
+        <relationship name="holding" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Holding" inverseName="coin_" inverseEntity="Holding"/>
+        <relationship name="transactions_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Transaction" inverseName="coin_" inverseEntity="Transaction"/>
+    </entity>
+    <entity name="Holding" representedClassName="Holding" syncable="YES" codeGenerationType="class">
+        <attribute name="amount_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="coin_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="holding" inverseEntity="Coin"/>
+        <relationship name="portfolio_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Portfolio" inverseName="holdings_" inverseEntity="Portfolio"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-    </elements>
+    <entity name="Portfolio" representedClassName="Portfolio" syncable="YES" codeGenerationType="class">
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <attribute name="redacted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="totalProceeds_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="totalSpent_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="holdings_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Holding" inverseName="portfolio_" inverseEntity="Holding"/>
+        <relationship name="transactions_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Transaction" inverseName="portfolio_" inverseEntity="Transaction"/>
+    </entity>
+    <entity name="PriceSummary" representedClassName="PriceSummary" syncable="YES" codeGenerationType="class">
+        <attribute name="date_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="price_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <relationship name="chart_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chart" inverseName="priceSummaries_" inverseEntity="Chart"/>
+    </entity>
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
+        <attribute name="coinPrice_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="date_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notes_" optional="YES" attributeType="String"/>
+        <attribute name="quantity_" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="type_" optional="YES" attributeType="String"/>
+        <relationship name="coin_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coin" inverseName="transactions_" inverseEntity="Coin"/>
+        <relationship name="portfolio_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Portfolio" inverseName="transactions_" inverseEntity="Portfolio"/>
+    </entity>
 </model>

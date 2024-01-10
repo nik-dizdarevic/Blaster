@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum SortType: String {
+    case name
+    case value
+    case marketCapRank
+}

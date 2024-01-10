@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+enum Page: String, CaseIterable, Identifiable {
+    case market
+    case portfolio
+    case watchlist
+    case search
+    
+    var id: Self { self }
+}

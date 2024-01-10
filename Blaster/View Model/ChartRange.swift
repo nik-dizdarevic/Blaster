@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum ChartRange: String, CaseIterable {
+    case one = "1"
+    case fourteen = "14"
+    case thirty = "30"
+    case max = "max"
+}

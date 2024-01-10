@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum TransactionType: String {
+    case buy
+    case sell
+}

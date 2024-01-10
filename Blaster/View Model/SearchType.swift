@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum SearchType {
+    case normal
+    case portfolio
+    case watchlist
+}

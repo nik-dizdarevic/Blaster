@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum ApiError: Error {
+    case invalidServerResponse
+}
