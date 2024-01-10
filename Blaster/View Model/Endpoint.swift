@@ -10,13 +10,14 @@ import Foundation
 struct Endpoint {
     let path: String
     let queryItems: [URLQueryItem]
+    let apiKey = "replace"
     
     var url: URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.coingecko.com"
         urlComponents.path = path
-        urlComponents.queryItems = queryItems
+        urlComponents.queryItems = queryItems + [URLQueryItem(name: "x_cg_demo_api_key", value: apiKey)]
         return urlComponents.url
     }
 }
